@@ -1,8 +1,10 @@
 
 
 import { useState } from 'react';
-import type { ChangeEvent, FormEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import type { TodoForm, Todo } from './interfaces/Form';
+import { FiAlertTriangle } from "react-icons/fi";
+import { FiCheck } from "react-icons/fi";
 
 const App = () => {
   const [contador, setContador] = useState<number>(10);
@@ -35,87 +37,204 @@ const App = () => {
     }));
   };
 
-  const envioForm = (event: FormEvent<HTMLFormElement>) => {
+  const envioForm = (event: any) => {
     event.preventDefault();
 
     const Tarea: Todo = {
+      id: crypto.randomUUID(),
       ...formulario,
       completada: false
     };
 
-    setListaTodo((prev) => [...prev, Tarea]);
+    setListaTodo([...listaTodo, Tarea]);
 
-    console.log(Tarea);
+    setFormulario({
+      titulo: '',
+      prioridad: 'Baja'
+    });
   };
 
   return (
     <>
-      <div>Mis quehaceres</div>
+      <main className="contenedor">
 
-      <p id="contador">{contador}</p>
+        <h1 className="titulo-principal">
+          Mis quehaceres
+        </h1>
 
-      <button onClick={incrementar}>
-        Incrementar contador
-      </button>
+        <section className="contador-card">
 
-      <button onClick={decrementar}>
-        Disminuir
-      </button>
+          <h2>Contador</h2>
 
-      <section>
-        <h2>Registro de nueva tarea</h2>
+          <p
+            className="contador"
+            style={{
+              backgroundColor: "#230de9",
+              color: "white",
+              padding: "10px",
+              borderRadius: "15px"
+            }}
+          >
+            {contador}
+          </p>
 
-        <form onSubmit={envioForm}>
-          <div>
-            <label htmlFor="titulo">Título</label>
+          <div className="botones-contador">
 
-            <input
-              type="text"
-              id="titulo"
-              placeholder="p. ej. revisar GitHub"
-              name="titulo"
-              value={formulario.titulo}
-              onChange={inputChange}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="prioridad">Prioridad</label>
-
-            <select
-              id="prioridad"
-              name="prioridad"
-              value={formulario.prioridad}
-              onChange={inputChange}
+            <button
+              className="btn btn-incrementar"
+              onClick={incrementar}
             >
-              <option value="Alta">Alta</option>
-              <option value="Media">Media</option>
-              <option value="Baja">Baja</option>
-            </select>
+              + Incrementar
+            </button>
+
+            <button
+              className="btn btn-disminuir"
+              onClick={decrementar}
+            >
+              - Disminuir
+            </button>
+
           </div>
 
-          <button type="submit">
-            Crear todo
-          </button>
-        </form>
-      </section>
+        </section>
 
-      <section>
-        <h2>Mis tareas</h2>
+        <section className="formulario-card">
 
-        {listaTodo.map((todo, index) => (
-          <div key={index}>
-            <p>Título: {todo.titulo}</p>
-            <p>Prioridad: {todo.prioridad}</p>
-            <p>Completada: {todo.completada ? 'Sí' : 'No'}</p>
+          <h2>Registro de nueva tarea</h2>
+
+          <form onSubmit={envioForm} className="formulario">
+
+            <div className="campo">
+
+              <label htmlFor="titulo">
+                Título
+              </label>
+
+              <input
+                type="text"
+                id="titulo"
+                placeholder="Ej. Revisar GitHub"
+                name="titulo"
+                onChange={inputChange}
+                value={formulario.titulo}
+              />
+
+            </div>
+
+            <div className="campo">
+
+              <label htmlFor="prioridad">
+                Prioridad
+              </label>
+
+              <select
+                id="prioridad"
+                name="prioridad"
+                onChange={inputChange}
+                value={formulario.prioridad}
+              >
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Baja">Baja</option>
+              </select>
+
+            </div>
+
+            <button
+              type="submit"
+              className="btn crear"
+            >
+              + Crear tarea
+            </button>
+
+          </form>
+
+        </section>
+
+        <section className="tabla-card">
+
+          <h2
+            className="titulo-tabla"
+            style={{
+              backgroundColor: "#00ff88",
+              color: "#000",
+              padding: "10px",
+              borderRadius: "12px"
+            }}
+          >
+            Mis tareas
+          </h2>
+
+          <div className="tabla-contenedor">
+
+            <table className="tabla-tareas">
+
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Título</th>
+                  <th>Prioridad</th>
+                  <th>Completada</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                {listaTodo.map((todo: Todo) => (
+
+                  <tr key={todo.id}>
+
+                    <td className="id-tarea">
+                      {todo.id}
+                    </td>
+
+                    <td>
+                      {todo.titulo}
+                    </td>
+
+                    <td>
+                      <span
+                        className={`prioridad ${todo.prioridad.toLowerCase()}`}
+                      >
+                        {todo.prioridad}
+                      </span>
+                    </td>
+
+                    <td>
+
+                      {todo.completada ? (
+
+                        <span className="estado completada">
+                          Sí <FiCheck />
+                        </span>
+
+                      ) : (
+
+                        <span className="estado no-completada">
+                          No <FiAlertTriangle />
+                        </span>
+
+                      )}
+
+                    </td>
+
+                  </tr>
+
+                ))}
+
+              </tbody>
+
+            </table>
+
           </div>
-        ))}
-      </section>
+
+        </section>
+
+      </main>
     </>
   );
 };
 
 export default App;
-
 
 

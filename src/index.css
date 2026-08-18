@@ -1,10 +1,277 @@
-/* */
-*{
-  margin : 0;
-  padding : 0;
-  box-sizing : border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-  font-family : Arial, Helvetica, sans-serif;
+body {
+
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  min-height: 100vh;
+  color: #070707e8;
+}
+
+/* CONTENEDOR PRINCIPAL */
+
+.contenedor {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* TÍTULO PRINCIPAL */
+
+.titulo-principal {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 40px;
+  color: #1e3a8a;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* TARJETAS */
+
+.contador-card,
+.formulario-card,
+.tabla-card {
+  background: rgb(255, 252, 252);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgb(114, 84, 245);
+  font-weight: bold;
+}
+
+/* CONTADOR */
+
+.contador-card {
+  text-align: center;
+}
+
+.contador-card h2,
+.formulario-card h2,
+.titulo-tabla {
+  color: #1e40af;
+  margin-bottom: 20px;
+}
+
+.contador {
+  font-size: 45px;
+  font-weight: bold;
+  color: #2563eb;
+  margin-bottom: 20px;
+}
+
+.botones-contador {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  
+}
+
+/* BOTONES */
+
+.btn {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.btn-incrementar {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-disminuir {
+  background: #64748b;
+  color: white;
+}
+
+.crear {
+  background: #19b655;
+  color: white;
+}
+
+/* FORMULARIO */
+
+.formulario {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.campo label {
+  font-weight: bold;
+  color: #334155;
+}
+
+.campo input,
+.campo select {
+  width: 230px;
+  padding: 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(19, 3, 238, 0.979);
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* TABLA */
+
+.tabla-card {
+  overflow: hidden;
+}
+
+.titulo-tabla {
+  text-align: center;
+  font-size: 28px;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.tabla-tareas {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+/* ENCABEZADO */
+
+.tabla-tareas thead {
+  background: #1e40af;
+  color: white;
+}
+
+.tabla-tareas th {
+  padding: 15px;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* FILAS */
+
+.tabla-tareas td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-tareas tbody tr {
+  transition: 0.2s;
+}
+
+.tabla-tareas tbody tr:hover {
+  background: #eff6ff;
+}
+
+/* ID */
+
+.id-tarea {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* PRIORIDADES */
+
+.prioridad {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.prioridad.alta {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.prioridad.media {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.prioridad.baja {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* ESTADO */
+
+.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.completada {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.no-completada {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+  .contenedor {
+    width: 95%;
+    padding: 20px 0;
+  }
+
+  .titulo-principal {
+    font-size: 30px;
+  }
+
+  .formulario {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .campo input,
+  .campo select {
+    width: 100%;
+  }
+
+  .botones-contador {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }

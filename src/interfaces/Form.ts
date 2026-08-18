@@ -7,6 +7,7 @@ export interface TodoForm {
 }
 
 export interface Todo {
+    id: string;
     titulo: string;
     prioridad: Priority;
     completada: boolean;
